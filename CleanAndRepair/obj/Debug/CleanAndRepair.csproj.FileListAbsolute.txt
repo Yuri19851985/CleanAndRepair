@@ -65,7 +65,7 @@ D:\Diplom\CleanAndRepair\CleanAndRepair\bin\Microsoft.AI.DependencyCollector.xml
 D:\Diplom\CleanAndRepair\CleanAndRepair\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\Diplom\CleanAndRepair\CleanAndRepair\bin\Microsoft.AI.WindowsServer.xml
 D:\Diplom\CleanAndRepair\CleanAndRepair\bin\Microsoft.AI.Web.xml
-D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.csprojResolveAssemblyReference.cache
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.csproj.CoreCompileInputs.cache
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.dll
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.pdb
+D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.csprojResolveAssemblyReference.cache

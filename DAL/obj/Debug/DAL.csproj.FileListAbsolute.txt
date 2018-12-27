@@ -1,0 +1,9 @@
+D:\Diplom\CleanAndRepair\DAL\bin\DAL.dll.config
+D:\Diplom\CleanAndRepair\DAL\bin\DAL.dll
+D:\Diplom\CleanAndRepair\DAL\bin\DAL.pdb
+D:\Diplom\CleanAndRepair\DAL\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Diplom\CleanAndRepair\DAL\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Diplom\CleanAndRepair\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\Diplom\CleanAndRepair\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache
+D:\Diplom\CleanAndRepair\DAL\obj\Debug\DAL.dll
+D:\Diplom\CleanAndRepair\DAL\obj\Debug\DAL.pdb
