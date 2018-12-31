@@ -8,7 +8,7 @@ namespace DAL.Entities
 {
     public class Order
     {
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public List<Service> Services { get; set; }
         public User User { get; set; }
         public DateTime DateOrderCheck { get; set; }

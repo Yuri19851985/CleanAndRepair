@@ -7,7 +7,7 @@ namespace DAL.Entities
 {
     public class Service
     {
-        public int ServiceId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; } // цена за один нормочас
         public double Count { get; set; } // количество нормочасов, величина расчетная

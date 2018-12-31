@@ -69,3 +69,6 @@ D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.csproj.CoreComp
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.dll
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.pdb
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.csprojResolveAssemblyReference.cache
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\DAL.dll
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\DAL.pdb
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\DAL.dll.config

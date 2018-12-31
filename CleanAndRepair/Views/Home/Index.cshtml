@@ -1,10 +1,25 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<DAL.Entities.GroupService>
+@{
+    Layout = null;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">Выберите услугу</p>
-    <p><a href="https://handy.com" class="btn btn-primary btn-lg">сюда</a></p>
-</div>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Список сервисов</title>
+</head>
+<body>
+    <h3>Категории услуг</h3>
+    <div>
+        <ul>
+            @foreach (var g in Model)
+            {
+            <li>@g.Name</li>
+            }
+        </ul>
+    </div>
+</body>
+</html>
 

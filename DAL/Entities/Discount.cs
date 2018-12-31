@@ -7,7 +7,7 @@ namespace DAL.Entities
 {
     public class Discount
     {
-        public int DiscountId { get; set; }
+        public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
         public double KoeffPrice { get; set; }
