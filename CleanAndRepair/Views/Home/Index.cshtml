@@ -5,21 +5,21 @@
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
+
     <title>Список сервисов</title>
-</head>
-<body>
+
     <h3>Категории услуг</h3>
     <div>
         <ul>
             @foreach (var g in Model)
             {
-            <li>@Html.ActionLink(g.Name, "ShowServices", new {id = g.Id })</li>
+                <li>@Ajax.ActionLink(g.Name, "ShowServices", new { id = g.Id }, new AjaxOptions { UpdateTargetId = "groupservice" })</li>
             }
         </ul>
     </div>
-</body>
-</html>
+    <br />
+    <div id="groupservice"> </div>
+    @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+
 

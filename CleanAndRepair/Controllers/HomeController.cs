@@ -20,7 +20,7 @@ namespace CleanAndRepair.Controllers
         {
             var srv = db.Services.Where(i => i.GroupId == id);
             if (srv != null)
-                return View(srv.ToList());
+                return PartialView(srv);
             return HttpNotFound();
         }
 
