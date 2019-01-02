@@ -16,7 +16,14 @@ namespace CleanAndRepair.Controllers
             return View(db.Groups.ToList());
         }
 
-     
+        public ActionResult ShowServices(int id)
+        {
+            var srv = db.Services.Where(i => i.GroupId == id);
+            if (srv != null)
+                return View(srv.ToList());
+            return HttpNotFound();
+        }
+
 
     }
 }
