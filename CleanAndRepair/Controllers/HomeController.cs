@@ -24,6 +24,9 @@ namespace CleanAndRepair.Controllers
             return HttpNotFound();
         }
 
-
+        public ActionResult ServiceClean()
+        {
+            return View(db.Groups.ToList());
+        }
     }
 }

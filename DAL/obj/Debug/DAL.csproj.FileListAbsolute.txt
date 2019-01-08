@@ -10,3 +10,4 @@ D:\Diplom\CleanAndRepair\DAL\bin\EntityFramework.dll
 D:\Diplom\CleanAndRepair\DAL\bin\EntityFramework.SqlServer.dll
 D:\Diplom\CleanAndRepair\DAL\bin\EntityFramework.xml
 D:\Diplom\CleanAndRepair\DAL\bin\EntityFramework.SqlServer.xml
+D:\Diplom\CleanAndRepair\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
