@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using CleanAndRepair.Models;
+using CleanAndRepair.Context;
+using CleanAndRepair.Models.Entities;
 
 namespace CleanAndRepair
 {

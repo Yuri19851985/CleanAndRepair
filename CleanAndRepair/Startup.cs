@@ -1,4 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using CleanAndRepair.Context;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(CleanAndRepair.Startup))]
