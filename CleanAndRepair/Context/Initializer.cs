@@ -79,38 +79,47 @@ namespace CleanAndRepair.Context
             group10.Services.Add(new Service() { Name = "Стрижка газона", Price = 80, Count = 1 });
             group10.Services.Add(new Service() { Name = "Уборка двора", Price = 90, Count = 1 });
             context.Groups.Add(group10);
+
+            //var user1 = new ApplicationUser { UserName = "Yuri", Email = "yuri-zhurakovski@yandex.ru" };
+
+            //var role1 = new ApplicationRole { Name = "admin" };
+            //var role2 = new ApplicationRole { Name = "user" };
+            //context.Roles.Add(role1);
+            //context.Roles.Add(role2);
+            //user1.Roles.Add(role1);
+
             context.SaveChanges();
 
-            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
+            //var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            // создаем две роли
-            var role1 = new IdentityRole { Name = "admin" };
-            var role2 = new IdentityRole { Name = "user" };
+            //// создаем две роли
+            //var role1 = new IdentityRole { Name = "admin" };
+            //var role2 = new IdentityRole { Name = "user" };
 
-            // добавляем роли в бд
-            roleManager.Create(role1);
-            roleManager.Create(role2);
+            //// добавляем роли в бд
+            //roleManager.Create(role1);
+            //roleManager.Create(role2);
 
-            // создаем пользователей
-            var admin = new ApplicationUser
-            {
-                Email = "yuri-zhurakovski@yandex.ru",
-                UserName = "yuri-zhurakovski@yandex.ru"
-            };
-            string password = "000000";
-            var result = userManager.Create(admin, password);
+            //// создаем пользователей
+            //var admin = new ApplicationUser
+            //{
+            //    Email = "yuri-zhurakovski@yandex.ru",
+            //    UserName = "yuri-zhurakovski@yandex.ru"
+            //};
+            //string password = "000000";
+            //var result = userManager.Create(admin, password);
 
-            // если создание пользователя прошло успешно
-            if (result.Succeeded)
-            {
-                // добавляем для пользователя роль
-                userManager.AddToRole(admin.Id, role1.Name);
-                userManager.AddToRole(admin.Id, role2.Name);
-            }
+            ////если создание пользователя прошло успешно
+            //if (result.Succeeded)
+            //{
+            //    //добавляем для пользователя роль
+            //    userManager.AddToRole(admin.Id, role1.Name);
+            //    userManager.AddToRole(admin.Id, role2.Name);
+            //}
 
-            base.Seed(context);
+            //base.Seed(context);
 
         }
     }

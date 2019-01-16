@@ -15,7 +15,7 @@ namespace CleanAndRepair.Context
         public ApplicationDbContext()
             : base("DbConnectionString", throwIfV1Schema: false)
         {
-            Database.SetInitializer(new Initializer());
+      //      Database.SetInitializer(new Initializer());
         }
 
         public static ApplicationDbContext Create()
@@ -28,5 +28,6 @@ namespace CleanAndRepair.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<GroupService> Groups { get; set; }
+
     }
 }
