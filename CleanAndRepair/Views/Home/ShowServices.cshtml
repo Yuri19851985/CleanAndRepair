@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<CleanAndRepair.Models.Entities.Service>
-    <ul class="nav nav-pills nav-stacked">
-        @foreach (var s in Model)
-        {
-        <li>@Html.ActionLink(s.Name, "Index", "Home")</li>
-        }
-    </ul>
-
+<table class="nav nav-pills nav-stacked">
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td class="col-md-4">@Html.ActionLink(s.Name, "BookService", new { id = s.Id })</td>
+        </tr>
+    }
+</table>

@@ -17,6 +17,7 @@ namespace CleanAndRepair.Controllers
             
         }
 
+        
         public ActionResult ShowServices(int id)
         {
             var gr = db.Groups.FirstOrDefault(Group => Group.Id.Equals(id));     // Where(i => i.GroupId == id);
@@ -29,5 +30,24 @@ namespace CleanAndRepair.Controllers
         {
             return View(db.Groups.ToList());
         }
+
+        public ActionResult BookService(int id)
+        {
+            var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));     // Where(i => i.GroupId == id);
+            if (service != null)
+                return View(service);
+            return HttpNotFound();
+        }
+
+        //public ActionResult Book(int id)
+        //{
+        //    var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));     // Where(i => i.GroupId == id);
+        //    if (service != null)
+        //    {
+
+        //    }
+
+        //    return HttpNotFound();
+        //}
     }
 }
