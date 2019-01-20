@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using CleanAndRepair.Models.Entities;
 
 
 namespace CleanAndRepair.Context
@@ -15,7 +14,7 @@ namespace CleanAndRepair.Context
         public ApplicationDbContext()
             : base("DbConnectionString", throwIfV1Schema: false)
         {
-      //      Database.SetInitializer(new Initializer());
+      //      Database.SetInitializer(new Initializer());      //запускаю только один раз
         }
 
         public static ApplicationDbContext Create()

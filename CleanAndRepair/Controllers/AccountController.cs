@@ -10,7 +10,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CleanAndRepair.Models;
 using System.Net;
-using CleanAndRepair.Models.Entities;
 
 namespace CleanAndRepair.Controllers
 {

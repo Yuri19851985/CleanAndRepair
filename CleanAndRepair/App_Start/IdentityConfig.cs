@@ -12,7 +12,6 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using CleanAndRepair.Models;
 using CleanAndRepair.Context;
-using CleanAndRepair.Models.Entities;
 
 namespace CleanAndRepair
 {

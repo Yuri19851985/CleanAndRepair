@@ -1,9 +1,11 @@
-﻿@model IEnumerable<CleanAndRepair.Models.Entities.Service>
+﻿@model IEnumerable<CleanAndRepair.Models.Service>
 <table class="nav nav-pills nav-stacked">
     @foreach (var s in Model)
     {
         <tr>
-            <td class="col-md-4">@Html.ActionLink(s.Name, "BookService", new { id = s.Id })</td>
+            <td class="col-md-4">
+                @Html.ActionLink(s.Name, "BookService", new { id = s.Id })
+            </td>
         </tr>
     }
 </table>

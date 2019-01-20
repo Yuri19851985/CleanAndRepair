@@ -33,21 +33,26 @@ namespace CleanAndRepair.Controllers
 
         public ActionResult BookService(int id)
         {
-            var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));     // Where(i => i.GroupId == id);
+            var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));     
             if (service != null)
                 return View(service);
             return HttpNotFound();
         }
 
-        //public ActionResult Book(int id)
-        //{
-        //    var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));     // Where(i => i.GroupId == id);
-        //    if (service != null)
-        //    {
+        public ActionResult PartCalcParametres(CalcCleanParametres model)
+        {
+            return PartialView();
+        }
 
-        //    }
+        public ActionResult BookCount(int id)
+        {
+            var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));
+            if (service != null)
+            {
 
-        //    return HttpNotFound();
-        //}
+            }
+
+            return HttpNotFound();
+        }
     }
 }

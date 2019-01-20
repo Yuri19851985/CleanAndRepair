@@ -1,28 +1,24 @@
-﻿@model CleanAndRepair.Models.Entities.Service
-
+﻿@model CleanAndRepair.Models.Service
 @{
-    ViewBag.Title = "BookService";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Заказ услуги</h2>
-
+<h2 class="col-md-offset-2">Заказ услуги</h2>
 <div>
-    <h4>Услуга</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayFor(m => m.Name)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            Описание услуги с фотографиями
         </dd>
-
-
+        <dd><hr /></dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Заказать услугу", "Book", new { id = Model.Id }) |
+<h4 class="col-md-offset-1">Введите параметры помещения</h4>
+<hr />
+@{Html.RenderAction("PartCalcParametres");}
+<div class="col-md-offset-1">
     @Html.ActionLink("Вернуться на главную", "Index")
-</p>
+</div>
