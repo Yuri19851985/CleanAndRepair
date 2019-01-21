@@ -8,7 +8,7 @@ namespace CleanAndRepair.ViewModels
 {
     public class CalcCleanViewModel
     {
+        public Service Service { get; set; }
         public CalcCleanParametres Parametres { get; set; }
-        public int MyProperty { get; set; }
     }
 }

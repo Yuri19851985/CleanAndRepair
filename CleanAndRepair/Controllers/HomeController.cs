@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CleanAndRepair.Context;
 using CleanAndRepair.Models;
+using CleanAndRepair.ViewModels;
 
 namespace CleanAndRepair.Controllers
 {
@@ -33,26 +34,28 @@ namespace CleanAndRepair.Controllers
 
         public ActionResult BookService(int id)
         {
-            var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));     
-            if (service != null)
-                return View(service);
-            return HttpNotFound();
-        }
-
-        public ActionResult PartCalcParametres(CalcCleanParametres model)
-        {
-            return PartialView();
-        }
-
-        public ActionResult BookCount(int id)
-        {
             var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));
+            CalcCleanViewModel model = new CalcCleanViewModel();
             if (service != null)
-            {
-
-            }
-
+                model.Service = service;
+            else return HttpNotFound();
+            if (model != null)
+                return View(model);
             return HttpNotFound();
         }
+
+       
+
+        [HttpPost]
+        public ActionResult BookService(CalcCleanViewModel model)
+        {
+            if (model != null)
+            {
+                return View("Zaebis");
+            }
+            return View("Error");
+        }
+
+           
     }
 }

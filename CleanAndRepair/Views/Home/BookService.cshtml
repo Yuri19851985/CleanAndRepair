@@ -1,24 +1,52 @@
-﻿@model CleanAndRepair.Models.Service
+﻿@model CleanAndRepair.ViewModels.CalcCleanViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2 class="col-md-offset-2">Заказ услуги</h2>
-<div>
+@using (Html.BeginForm("BookService", "Home", FormMethod.Post))
+{
+        <h2 class="col-md-offset-2">Заказ услуги</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayFor(m => m.Service.Name)
+            </dt>
+            <dd>
+                Описание услуги с фотографиями
+            </dd>
+            <dd><hr /></dd>
+        </dl>
+    </div>
+    <h4 class="col-md-offset-1">Введите параметры помещения</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayFor(m => m.Name)
-        </dt>
-        <dd>
-            Описание услуги с фотографиями
-        </dd>
-        <dd><hr /></dd>
-    </dl>
-</div>
-<h4 class="col-md-offset-1">Введите параметры помещения</h4>
-<hr />
-@{Html.RenderAction("PartCalcParametres");}
+    <div>
+        <dl class="dl-horizontal">
+            <dt> Площадь помещения</dt>
+            <dd>
+                @Html.EditorFor(m => m.Parametres.RoomSquare)
+                @Html.Label("кв м")
+            </dd>
+            <dd><br /></dd>
+            <dt> Количество комнат</dt>
+            <dd>
+                @Html.EditorFor(m => m.Parametres.CountRooms)
+            </dd>
+            <dd><br /></dd>
+            <dt> Степень загрязнения</dt>
+            <dd>
+                @Html.CheckBoxFor(m => m.Parametres.Strong)
+                @Html.Label("Сильная")
+                @Html.CheckBoxFor(m => m.Parametres.Medium)
+                @Html.Label("Умеренная")
+                @Html.CheckBoxFor(m => m.Parametres.Easy)
+                @Html.Label("Легкая")
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Заказать услугу" class="btn btn-default" />
+    </div>
+}
 <div class="col-md-offset-1">
     @Html.ActionLink("Вернуться на главную", "Index")
 </div>
