@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using CleanAndRepair.Context;
 using CleanAndRepair.Models;
 using CleanAndRepair.ViewModels;
@@ -44,15 +45,48 @@ namespace CleanAndRepair.Controllers
             return HttpNotFound();
         }
 
-       
+       // Рачет стоимости уборки помещения
+       public double CalcClean (Service service, CalcCleanParametres parametres)
+        {
+            //вычисляем коэффициент загрязненности в зависимости от чекбоксов
+            double KoeffEasy = parametres.Easy ? 0.9 : 0;
+            double KoeffMedium = parametres.Medium ? 1 : 0;
+            double KoeffStrong = parametres.Strong ? 1.3 : 0;
+
+            double Norma = 15; // условная норма 15 м.кв 1 нормочас 
+            double CountHours;
+
+            if (service != null && parametres != null)
+            {
+                //расчет количества нормочасов 
+                CountHours = parametres.RoomSquare / Norma * (KoeffEasy + KoeffMedium + KoeffStrong);
+
+                return service.Price * CountHours;                 
+            }
+            return 0;
+        }
 
         [HttpPost]
         public ActionResult BookService(CalcCleanViewModel model)
         {
-            if (model != null)
+            Order NewOrder = new Order();
+            NewOrder.ServiceOrder = model.Service;
+            NewOrder.DateOrderCheck = DateTime.Now;
+            NewOrder.SummPosition = CalcClean(model.Service, model.Parametres);
+
+            // добавляем авторизованному юзеру позицию заказа
+            string NameCurrentUser;
+            if (System.Web.HttpContext.Current != null &&
+                System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                return View("Zaebis");
+                NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
+                if (NameCurrentUser != null)
+                {
+                    db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser)).Orders.Add(NewOrder);
+                    return View(NewOrder);
+                }
             }
+                       
             return View("Error");
         }
 

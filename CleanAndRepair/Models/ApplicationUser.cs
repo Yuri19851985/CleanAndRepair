@@ -13,7 +13,6 @@ namespace CleanAndRepair.Models
     {
         public string Address { get; set; }
         public List<Order> Orders { get; set; }
-        public int OrderId { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

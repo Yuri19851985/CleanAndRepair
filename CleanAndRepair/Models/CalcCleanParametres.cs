@@ -11,7 +11,6 @@ namespace CleanAndRepair.Models
         public double RoomSquare { get; set; }
         public int CountRooms { get; set; }
         public int CleanLevel { get; set; }
-        ApplicationUser User {get; set;}
         public bool Strong { get; set; }
         public bool Medium { get; set; }
         public bool Easy { get; set; }
