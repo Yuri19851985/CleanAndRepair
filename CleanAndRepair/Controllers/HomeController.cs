@@ -82,7 +82,9 @@ namespace CleanAndRepair.Controllers
                 NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
                 if (NameCurrentUser != null)
                 {
-                    db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser)).Orders.Add(NewOrder);
+                    var CurrentUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
+                    CurrentUser.Orders.Add(NewOrder);
+                    db.SaveChanges();
                     return View(NewOrder);
                 }
             }
