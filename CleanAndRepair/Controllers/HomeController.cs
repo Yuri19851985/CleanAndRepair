@@ -71,8 +71,26 @@ namespace CleanAndRepair.Controllers
         {
             Order NewOrder = new Order();
             NewOrder.ServiceOrder = model.Service;
+
             NewOrder.DateOrderCheck = DateTime.Now;
-            NewOrder.SummPosition = CalcClean(model.Service, model.Parametres);
+            NewOrder.DateOrderComplete = new DateTime(2019, 2, 28);
+            NewOrder.TotalPrice = CalcClean(model.Service, model.Parametres);
+            // получаем текущего юзера
+            string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
+            if (NameCurrentUser != null)
+            {
+                NewOrder.User = new ApplicationUser() { UserName = NameCurrentUser };
+            }
+            if (NewOrder != null)
+            {
+                return View("ServiceOrderConfirm", NewOrder);
+            }
+            return View("Error");
+        }
+
+        [HttpPost]
+        public ActionResult BookServiceComplete (Order NewOrder)
+        {
 
             // добавляем авторизованному юзеру позицию заказа
             string NameCurrentUser;
@@ -83,15 +101,19 @@ namespace CleanAndRepair.Controllers
                 if (NameCurrentUser != null)
                 {
                     var CurrentUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
-                    CurrentUser.Orders.Add(NewOrder);
-                    db.SaveChanges();
-                    return View(NewOrder);
+                    if(CurrentUser!=null)
+                    {
+                        CurrentUser.Orders = new List<Order>();
+                        CurrentUser.Orders.Add(NewOrder);
+                        db.SaveChanges();
+                        return View("Zaebis");
+                    }
+                   
                 }
             }
-                       
             return View("Error");
         }
 
-           
+
     }
 }

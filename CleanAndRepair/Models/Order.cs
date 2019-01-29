@@ -10,7 +10,6 @@ namespace CleanAndRepair.Models
         public int Id { get; set; }
         public ApplicationUser User { get; set; }
         public Service ServiceOrder { get; set; }
-        public double SummPosition { get; set; }  //количество нормочасов требуемое для выполнения данной услуги
         public DateTime DateOrderCheck { get; set; }
         public DateTime DateOrderComplete { get; set; }
         public bool Complete { get; set; }

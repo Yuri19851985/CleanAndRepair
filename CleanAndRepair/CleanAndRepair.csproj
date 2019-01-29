@@ -277,6 +277,7 @@
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Home\BookService.cshtml" />
     <Content Include="Views\Home\BookServiceComplete.cshtml" />
+    <Content Include="Views\Home\ServiceOrderConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

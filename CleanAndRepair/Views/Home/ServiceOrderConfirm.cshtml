@@ -1,0 +1,29 @@
+﻿@model CleanAndRepair.Models.Order
+
+@{
+    /**/
+
+    ViewBag.Title = "Подтверждение заказа";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Подтверждение заказа</h2>
+@using (Html.BeginForm("BookServiceComplete", "Home", FormMethod.Post))
+{
+    <div class="col-md-offset-2">
+        @Html.DisplayFor(m => m.User.UserName), Вы заказали
+        @Html.DisplayFor(m => m.ServiceOrder.Name) на сумму:
+        @Html.DisplayFor(m => m.TotalPrice) рублей
+    </div>
+
+    @Html.HiddenFor(m => m.User.UserName)
+    @Html.HiddenFor(m => m.ServiceOrder.Name)
+    @Html.HiddenFor(m => m.TotalPrice)
+    @Html.HiddenFor(m => m.DateOrderCheck)
+    @Html.HiddenFor(m => m.DateOrderComplete)
+    @Html.HiddenFor(m => m.User)
+
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Подтвердить заказ" class="btn btn-default" />
+    </div>
+}
