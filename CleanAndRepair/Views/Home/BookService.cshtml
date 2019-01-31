@@ -37,12 +37,12 @@
             <dd><br /></dd>           
             <dt> Степень загрязнения</dt>
             <dd>
-                @Html.CheckBoxFor(m => m.Parametres.Strong)
-                @Html.Label("Сильная")
-                @Html.CheckBoxFor(m => m.Parametres.Medium)
-                @Html.Label("Умеренная")
-                @Html.CheckBoxFor(m => m.Parametres.Easy)
-                @Html.Label("Легкая")
+                @Html.RadioButtonFor(m => m.Parametres.Easy, "Easy")
+                @Html.Label("Легкое")
+                @Html.RadioButtonFor(m => m.Parametres.Medium, "Medium")
+                @Html.Label("Умеренное")
+                @Html.RadioButtonFor(m => m.Parametres.Strong, "Strong")
+                @Html.Label("Сильное")
             </dd>
         </dl>
     </div>
