@@ -1,9 +1,16 @@
-﻿@model CleanAndRepair.Models.Order
-
+﻿
 @{
-    ViewBag.Title = "BookServiceComplete";
+    ViewBag.Title = "Спасибо за покупку";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>BookServiceComplete</h2>
+<h2>Спасибо @ViewBag.UserName, Ваш заказ принят!</h2>
+
+<div class="col-md-offset-1">
+    @Html.ActionLink("К списку заказов", "ViewOrderList")
+</div>
+
+<div class="col-md-offset-1">
+    @Html.ActionLink("Вернуться на главную", "Index")
+</div>
 

@@ -106,7 +106,8 @@ namespace CleanAndRepair.Controllers
                         CurrentUser.Orders = new List<Order>();
                         CurrentUser.Orders.Add(NewOrder);
                         db.SaveChanges();
-                        return View("Zaebis");
+                        ViewBag.UserName = NameCurrentUser;
+                        return View("BookServiceComplete");
                     }
                    
                 }
@@ -114,6 +115,10 @@ namespace CleanAndRepair.Controllers
             return View("Error");
         }
 
+        public ActionResult ViewOrderList ()
+        {
+            return View("Zaebis");
+        }
 
     }
 }
