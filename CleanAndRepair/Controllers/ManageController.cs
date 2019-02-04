@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CleanAndRepair.Models;
+using CleanAndRepair.Context;
 
 namespace CleanAndRepair.Controllers
 {
@@ -321,6 +322,23 @@ namespace CleanAndRepair.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
+
+        private ApplicationDbContext db = new ApplicationDbContext(); 
+
+        public ActionResult OrderListIdentityUser()
+        {
+            string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
+            ApplicationUser CurrentIsentityUser = new ApplicationUser();
+            CurrentIsentityUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
+            if(CurrentIsentityUser != null)
+            {
+                return View(CurrentIsentityUser.Orders);
+            }
+            return View("Ошибка. Пользователь не найден!");
+        }
+
+
+
 
         protected override void Dispose(bool disposing)
         {

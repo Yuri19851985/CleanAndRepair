@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CleanAndRepair.Models.Order>
+
+@{
+    ViewBag.Title = "OrderListIdentityUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Мои заказы</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Услуга")
+        </th>
+        <th>
+            @Html.DisplayName("Дата заказа")
+        </th>
+        <th>
+            @Html.DisplayName("Дата выполнения")
+        </th>    
+        <th>
+            @Html.DisplayName("Сумма в руб.")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceOrder.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOrderCheck)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOrderComplete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Complete)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

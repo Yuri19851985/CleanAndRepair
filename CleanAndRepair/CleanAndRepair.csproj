@@ -278,6 +278,7 @@
     <Content Include="Views\Home\BookService.cshtml" />
     <Content Include="Views\Home\BookServiceComplete.cshtml" />
     <Content Include="Views\Home\ServiceOrderConfirm.cshtml" />
+    <Content Include="Views\Manage\OrderListIdentityUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
