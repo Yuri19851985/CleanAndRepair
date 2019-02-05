@@ -91,7 +91,12 @@ namespace CleanAndRepair.Controllers
         [HttpPost]
         public ActionResult BookServiceComplete (Order NewOrder)
         {
-
+            //заполняем модель сервиса в заказе (х.з. почему-то из представления передается только поле Service.Name 
+            var CurrentOrderService = db.Services.FirstOrDefault(service => service.Name == NewOrder.ServiceOrder.Name);
+            if(CurrentOrderService != null)
+            {
+                NewOrder.ServiceOrder = CurrentOrderService;
+            }
             // добавляем авторизованному юзеру позицию заказа
             string NameCurrentUser;
             if (System.Web.HttpContext.Current != null &&
@@ -103,7 +108,6 @@ namespace CleanAndRepair.Controllers
                     var CurrentUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
                     if(CurrentUser!=null)
                     {
-                        CurrentUser.Orders = new List<Order>();
                         CurrentUser.Orders.Add(NewOrder);
                         db.SaveChanges();
                         ViewBag.UserName = NameCurrentUser;

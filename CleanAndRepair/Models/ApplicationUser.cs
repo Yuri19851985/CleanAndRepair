@@ -12,7 +12,7 @@ namespace CleanAndRepair.Models
     public class ApplicationUser : IdentityUser
     {
         public string Address { get; set; }
-        public List<Order> Orders { get; set; }
+        public List<Order> Orders = new List<Order>();
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

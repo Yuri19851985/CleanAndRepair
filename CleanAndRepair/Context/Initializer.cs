@@ -79,6 +79,8 @@ namespace CleanAndRepair.Context
             group10.Services.Add(new Service() { Name = "Уборка двора", Price = 90 });
             context.Groups.Add(group10);
 
+
+
             context.SaveChanges();
 
             //var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));

@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CleanAndRepair.Models;
+using CleanAndRepair.ViewModels;
 using CleanAndRepair.Context;
 
 namespace CleanAndRepair.Controllers
@@ -328,11 +329,20 @@ namespace CleanAndRepair.Controllers
         public ActionResult OrderListIdentityUser()
         {
             string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
-            ApplicationUser CurrentIsentityUser = new ApplicationUser();
-            CurrentIsentityUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
-            if(CurrentIsentityUser != null)
+            var CurrentIdentityUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
+            // выбираем список заказов с Id текущего пользователя
+            var OrdersCurrentUser = db.Orders.Where(order => order.User.Id == CurrentIdentityUser.Id);
+            foreach(var item in OrdersCurrentUser)
             {
-                return View(CurrentIsentityUser.Orders);
+                var OrderService = db.Services.FirstOrDefault(service => service.Id == item.ServiceOrder.Id);
+                if(OrderService != null)
+                {
+                    item.ServiceOrder = OrderService;
+                }
+            }
+            if(OrdersCurrentUser.Count() != 0)
+            {
+                return View(OrdersCurrentUser);
             }
             return View("Ошибка. Пользователь не найден!");
         }
