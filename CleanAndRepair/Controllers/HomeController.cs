@@ -96,6 +96,7 @@ namespace CleanAndRepair.Controllers
             if(CurrentOrderService != null)
             {
                 NewOrder.ServiceOrder = CurrentOrderService;
+                NewOrder.Complete = false;
             }
             // добавляем авторизованному юзеру позицию заказа
             string NameCurrentUser;

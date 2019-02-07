@@ -11,6 +11,6 @@ namespace CleanAndRepair.Models
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
         public double KoeffPrice { get; set; }
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
     }
 }

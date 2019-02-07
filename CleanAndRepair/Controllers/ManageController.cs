@@ -347,8 +347,15 @@ namespace CleanAndRepair.Controllers
             return View("Ошибка. Пользователь не найден!");
         }
 
+        public ActionResult DeleteConfirm()
+        {
+            return PartialView();
+        }
 
-
+        public ActionResult DetailsOrder(int id)
+        {
+            return PartialView();
+        }
 
         protected override void Dispose(bool disposing)
         {

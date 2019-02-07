@@ -8,8 +8,8 @@ namespace CleanAndRepair.Models
     public class Order
     {
         public int Id { get; set; }
-        public ApplicationUser User { get; set; }
-        public Service ServiceOrder { get; set; }
+        public virtual ApplicationUser User { get; set; }
+        public virtual Service ServiceOrder { get; set; }
         public DateTime DateOrderCheck { get; set; }
         public DateTime DateOrderComplete { get; set; }
         public bool Complete { get; set; }
