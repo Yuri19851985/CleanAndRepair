@@ -23,9 +23,11 @@
             @Html.DisplayName("Статус")
         </th>
         <th>
-            @Html.DisplayName("Сумма в руб.")
+            @Html.DisplayName("Сумма в руб")
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayName("Действия")
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -41,14 +43,14 @@
                 @Html.DisplayFor(modelItem => item.DateOrderComplete)
             </td>
             <td>
-                @Html.Display(item.Complete ? "Выполнен" : "Ожидается")
+                @Html.DisplayFor(modelItem => item.Complete)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
             </td>
             <td>
                 @Ajax.ActionLink("Подробности", "DetailsOrder", new { id = item.Id }, new AjaxOptions { UpdateTargetId = "DetailsOrDeleteConfirm" }) |
-                @Ajax.ActionLink("Отменить", "DeleteConfirm", new AjaxOptions { UpdateTargetId = "DetailsOrDeleteConfirm" })
+                @Html.ActionLink("Отменить", "DeleteOrder", new { id = item.Id })
             </td>
         </tr>
         <tr id="DetailsOrDeleteConfirm"></tr>

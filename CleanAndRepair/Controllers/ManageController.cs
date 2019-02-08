@@ -344,12 +344,19 @@ namespace CleanAndRepair.Controllers
             {
                 return View(OrdersCurrentUser);
             }
-            return View("Ошибка. Пользователь не найден!");
+            return View("Список заказов пуст");
         }
 
-        public ActionResult DeleteConfirm()
+        public ActionResult DeleteOrder(int? id)
         {
-            return PartialView();
+            Order OrderDelete = db.Orders.Find(id);
+            if (OrderDelete != null)
+            {
+                db.Orders.Remove(OrderDelete);
+                db.SaveChanges();
+            }
+            else return View("Error. Такого заказа не существует!");
+            return RedirectToAction("OrderListIdentityUser");
         }
 
         public ActionResult DetailsOrder(int id)
