@@ -37,11 +37,11 @@
             <dd><br /></dd>
             <dt> Степень загрязнения</dt>
             <dd>
-                @Html.RadioButtonFor(m => m.Parametres.Easy, "Easy")
+                @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Easy", new { @name = "LevelClean"})
                 @Html.Label("Легкое")
-                @Html.RadioButtonFor(m => m.Parametres.Medium, "Medium")
+                @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Medium", new { @name = "LevelClean" })
                 @Html.Label("Умеренное")
-                @Html.RadioButtonFor(m => m.Parametres.Strong, "Strong")
+                @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Strong", new { @name = "LevelClean" })
                 @Html.Label("Сильное")
             </dd>
         </dl>

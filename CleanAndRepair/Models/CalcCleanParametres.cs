@@ -10,10 +10,7 @@ namespace CleanAndRepair.Models
         public int Id { get; set; }
         public double RoomSquare { get; set; }
         public int CountRooms { get; set; }
-        public int CleanLevel { get; set; }
-        public string Strong { get; set; }
-        public string Medium { get; set; }
-        public string Easy { get; set; }
+        public string CleanLevel { get; set; }   // уровень загрязнения помещения из радиобаттонов
     }
 }
 

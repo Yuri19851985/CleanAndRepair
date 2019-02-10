@@ -49,9 +49,9 @@ namespace CleanAndRepair.Controllers
        public double CalcClean (Service service, CalcCleanParametres parametres)
         {
             //вычисляем коэффициент загрязненности в зависимости от чекбоксов
-            double KoeffEasy = parametres.Easy =="Easy" ? 0.9 : 0;
-            double KoeffMedium = parametres.Medium == "Medium" ? 1 : 0;
-            double KoeffStrong = parametres.Strong == "Strong" ? 1.3 : 0;
+            double KoeffEasy = parametres.CleanLevel =="Easy" ? 0.9 : 0;
+            double KoeffMedium = parametres.CleanLevel == "Medium" ? 1 : 0;
+            double KoeffStrong = parametres.CleanLevel == "Strong" ? 1.3 : 0;
 
             double Norma = 15; // условная норма 15 м.кв 1 нормочас 
             double CountHours;

@@ -14,7 +14,7 @@ namespace CleanAndRepair.Context
         public ApplicationDbContext()
             : base("DbConnectionString", throwIfV1Schema: false)
         {
-         //   Database.SetInitializer(new Initializer());      //запускаю только один раз
+            Database.SetInitializer(new Initializer());      //запускаю только один раз
         }
 
         public static ApplicationDbContext Create()

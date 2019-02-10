@@ -347,7 +347,7 @@ namespace CleanAndRepair.Controllers
             return View("Список заказов пуст");
         }
 
-        public ActionResult DeleteOrder(int? id)
+        public ActionResult DeleteOrder(int id)
         {
             Order OrderDelete = db.Orders.Find(id);
             if (OrderDelete != null)
@@ -358,12 +358,7 @@ namespace CleanAndRepair.Controllers
             else return View("Error. Такого заказа не существует!");
             return RedirectToAction("OrderListIdentityUser");
         }
-
-        public ActionResult DetailsOrder(int id)
-        {
-            return PartialView();
-        }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
