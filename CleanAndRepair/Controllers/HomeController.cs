@@ -36,6 +36,27 @@ namespace CleanAndRepair.Controllers
         public ActionResult BookService(int id)
         {
             var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));
+            if (service != null)
+            {
+                var GroupId = service.Group.Id;
+                if (GroupId == 1)
+                {
+                    RedirectToAction("BookServiceClean", new { id });
+                }
+            }
+            CalcCleanViewModel model = new CalcCleanViewModel();
+            if (service != null)
+                model.Service = service;
+            else return HttpNotFound();
+            if (model != null)
+                return View(model);
+            return HttpNotFound();
+        }
+
+        // выполняется если пользователь выбрал услугу из группы "Уборка"
+        public ActionResult BookServiceClean(int id)
+        {
+            var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));
             CalcCleanViewModel model = new CalcCleanViewModel();
             if (service != null)
                 model.Service = service;

@@ -1,0 +1,55 @@
+﻿@model CleanAndRepair.ViewModels.CalcCleanViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Подтверждение заказа";
+}
+@using (Html.BeginForm("BookService", "Home", FormMethod.Post))
+{
+    <h2 class="col-md-offset-2">Заказ услуги</h2>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayFor(m => m.Service.Name)
+            </dt>
+            <dd>
+                Описание услуги с фотографиями
+            </dd>
+            <dd><hr /></dd>
+        </dl>
+    </div>
+
+    @Html.HiddenFor(m => m.Service.Id)
+    @Html.HiddenFor(m => m.Service.Price)
+    @Html.HiddenFor(m => m.Service.Name)
+    @Html.HiddenFor(m => m.Service.Group)
+
+
+    <h4 class="col-md-offset-1">Введите параметры помещения</h4>
+    <hr />
+    <div>
+        <dl class="dl-horizontal">
+            <dt> Площадь помещения</dt>
+            <dd>
+                @Html.EditorFor(m => m.Parametres.RoomSquare)
+                @Html.Label("кв м")
+            </dd>
+            <dd><br /></dd>
+            <dt> Степень загрязнения</dt>
+            <dd>
+                @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Easy", new { @name = "LevelClean"})
+                @Html.Label("Легкое")
+                @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Medium", new { @name = "LevelClean" })
+                @Html.Label("Умеренное")
+                @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Strong", new { @name = "LevelClean" })
+                @Html.Label("Сильное")
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Заказать услугу" class="btn btn-default" />
+    </div>
+}
+<div class="col-md-offset-1">
+    @Html.ActionLink("Вернуться на главную", "Index")
+</div>

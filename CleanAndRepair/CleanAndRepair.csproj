@@ -276,10 +276,11 @@
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
-    <Content Include="Views\Home\BookService.cshtml" />
+    <Content Include="Views\Home\BookServiceClean.cshtml" />
     <Content Include="Views\Home\BookServiceComplete.cshtml" />
     <Content Include="Views\Home\ServiceOrderConfirm.cshtml" />
     <Content Include="Views\Manage\OrderListIdentityUser.cshtml" />
+    <Content Include="Views\Home\BookService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
