@@ -41,7 +41,7 @@ namespace CleanAndRepair.Controllers
                 var GroupId = service.Group.Id;
                 if (GroupId == 1)
                 {
-                    RedirectToAction("BookServiceClean", new { id });
+                    return RedirectToAction("BookServiceClean", new { id });                    
                 }
             }
             CalcCleanViewModel model = new CalcCleanViewModel();
@@ -90,11 +90,17 @@ namespace CleanAndRepair.Controllers
         [HttpPost]
         public ActionResult BookService(CalcCleanViewModel model)
         {
+            //если дата введена неверно (по-хорошему надо сделать с валидаторами прямо на странице
+            if(model.DateComplete <=DateTime.Now)
+            {
+                RedirectToAction("BookService", new { model.Service.Id});
+            }
+            // если дата введена верно
             Order NewOrder = new Order();
             NewOrder.ServiceOrder = model.Service;
 
             NewOrder.DateOrderCheck = DateTime.Now;
-            NewOrder.DateOrderComplete = new DateTime(2019, 2, 28);
+            NewOrder.DateOrderComplete = model.DateComplete;
             NewOrder.TotalPrice = CalcClean(model.Service, model.Parametres);
             // получаем текущего юзера
             string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;

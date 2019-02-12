@@ -10,5 +10,6 @@ namespace CleanAndRepair.ViewModels
     {
         public virtual Service Service { get; set; }
         public CalcCleanParametres Parametres { get; set; }
+        public DateTime DateComplete { get; set; }
     }
 }

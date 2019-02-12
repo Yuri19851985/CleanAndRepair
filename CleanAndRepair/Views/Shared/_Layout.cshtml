@@ -24,12 +24,14 @@
             </div>
         </div>
     </div>
-        @RenderBody()
-        
+    @RenderBody()
+
     @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/jqueryui")
     @RenderSection("scripts", required: false)
 </body>
 </html>

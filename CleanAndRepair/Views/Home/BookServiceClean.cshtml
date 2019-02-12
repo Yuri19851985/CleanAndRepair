@@ -29,6 +29,11 @@
     <hr />
     <div>
         <dl class="dl-horizontal">
+            <dt> Выберите удобную для Вас дату</dt>
+            <dd>
+                @Html.EditorFor(m => m.DateComplete, new { htmlAttributes = new { @type = "date", @name = "date" } })
+                @Html.ValidationMessageFor(m => m.DateComplete, "", new { @class = "text-danger" })
+            </dd>
             <dt> Площадь помещения</dt>
             <dd>
                 @Html.EditorFor(m => m.Parametres.RoomSquare)
@@ -37,7 +42,7 @@
             <dd><br /></dd>
             <dt> Степень загрязнения</dt>
             <dd>
-                @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Easy", new { @name = "LevelClean"})
+                @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Easy", new { @name = "LevelClean" })
                 @Html.Label("Легкое")
                 @Html.RadioButtonFor(m => m.Parametres.CleanLevel, "Medium", new { @name = "LevelClean" })
                 @Html.Label("Умеренное")
