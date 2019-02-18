@@ -33,6 +33,7 @@ namespace CleanAndRepair.Controllers
             return View(db.Groups.ToList());
         }
 
+        [Authorize(Roles = "user")]
         public ActionResult BookService(int id)
         {
             var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));
@@ -54,6 +55,7 @@ namespace CleanAndRepair.Controllers
         }
 
         // выполняется если пользователь выбрал услугу из группы "Уборка"
+        [Authorize(Roles = "user")]
         public ActionResult BookServiceClean(int id)
         {
             var service = db.Services.FirstOrDefault(Service => Service.Id.Equals(id));
@@ -88,12 +90,13 @@ namespace CleanAndRepair.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "user")]
         public ActionResult BookService(CalcCleanViewModel model)
         {
             //если дата введена неверно (по-хорошему надо сделать с валидаторами прямо на странице
-            if(model.DateComplete <=DateTime.Now)
+            if(model.DateComplete <= DateTime.Now)
             {
-                RedirectToAction("BookService", new { model.Service.Id});
+                return RedirectToAction("BookService", new { model.Service.Id});
             }
             // если дата введена верно
             Order NewOrder = new Order();
@@ -101,7 +104,19 @@ namespace CleanAndRepair.Controllers
 
             NewOrder.DateOrderCheck = DateTime.Now;
             NewOrder.DateOrderComplete = model.DateComplete;
-            NewOrder.TotalPrice = CalcClean(model.Service, model.Parametres);
+            //проверяю из группы "уборка" или нет
+            var service = db.Services.FirstOrDefault(s => s.Id == model.Service.Id);
+            if (service != null)
+            {
+                var GroupId = service.Group.Id;
+                if (GroupId == 1)
+                {
+                    NewOrder.TotalPrice = CalcClean(model.Service, model.Parametres);
+                }
+                else NewOrder.TotalPrice = model.Service.Price;
+            }
+            else return View("Error. Service not found!");
+            
             // получаем текущего юзера
             string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
             if (NameCurrentUser != null)
@@ -116,6 +131,7 @@ namespace CleanAndRepair.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "user")]
         public ActionResult BookServiceComplete (Order NewOrder)
         {
             //заполняем модель сервиса в заказе (х.з. почему-то из представления передается только поле Service.Name 
@@ -142,17 +158,10 @@ namespace CleanAndRepair.Controllers
                         db.SaveChanges();
                         ViewBag.UserName = NameCurrentUser;
                         return View("BookServiceComplete");
-                    }
-                   
+                    }                   
                 }
             }
             return View("Error");
         }
-
-        public ActionResult ViewOrderList ()
-        {
-            return View("Zaebis");
-        }
-
     }
 }

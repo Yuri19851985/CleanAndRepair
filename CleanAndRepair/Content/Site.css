@@ -23,6 +23,23 @@ textarea {
     max-width: 280px;
 }
 
+ul.menu > li {
+    float: left;
+    position: relative;
+}
+
+ul.menu > li > a {
+    display: block;
+    padding: 10px;
+    color: white;
+    background-color: red;
+    text-decoration: none;
+}
+
+ul.menu > li > a:hover {
+    background-color: black;
+}
+
 ul.submenu {
     display: none;
     position: absolute;
@@ -47,6 +64,9 @@ ul.submenu > li > a {
 
 ul.submenu > li > a:hover {
     text-decoration: underline;
+}
+ul.menu > li:hover > ul.submenu {
+    display: block;
 }
 
 #dateCompleteField {

@@ -1,21 +1,37 @@
 ﻿@using Microsoft.AspNet.Identity
-
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right">
-        <li class="menu">
-            @Html.ActionLink("Здравствуйте " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            <ul class="submenu">
-                <li>@Html.ActionLink("Профиль", "Index", "Roles")</li>
-                <li>@Html.ActionLink("Мои заказы", "Index", "Manage")</li>
-            </ul>
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выход</a></li>
-    </ul>
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Выход</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Здравствуйте @User.Identity.GetUserName()!
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    @if (User.IsInRole("worker"))
+                    {
+                        <li><a href="/Index/Manage">Список заказов</a></li>
+                        <li><a href="/Manage/OrderListIdentityUser">Достижения</a></li>
+                    }
+                    else if (User.IsInRole("admin"))
+                        {
+                            <li><a href="/Index/Manage">Список пользователей</a></li>
+                            <li><a href="/Manage/OrderListIdentityUser">Список работников</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/Index/Manage">Профиль</a></li>
+                            <li><a href="/Manage/OrderListIdentityUser">Мои заказы</a></li>
+                        }
+                </ul>
+            </li>
+        </ul>
     }
 }
 else

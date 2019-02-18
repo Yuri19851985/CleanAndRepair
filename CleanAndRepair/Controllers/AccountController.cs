@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CleanAndRepair.Models;
 using System.Net;
+using CleanAndRepair.Context;
 
 namespace CleanAndRepair.Controllers
 {
@@ -143,6 +144,8 @@ namespace CleanAndRepair.Controllers
             return View();
         }
 
+
+        private ApplicationDbContext db = new ApplicationDbContext();
         //
         // POST: /Account/Register
         [HttpPost]
@@ -156,14 +159,13 @@ namespace CleanAndRepair.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    // если регистрируется первый пользователь то роль Админ, все последующие User
+                    if(db.Users.Count() == 1)
+                    {
+                        await UserManager.AddToRoleAsync(user.Id, "admin");
+                    }
+                    else await UserManager.AddToRoleAsync(user.Id, "user");
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);                       
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

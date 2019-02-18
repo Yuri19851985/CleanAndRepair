@@ -340,11 +340,7 @@ namespace CleanAndRepair.Controllers
                     item.ServiceOrder = OrderService;
                 }
             }
-            if(OrdersCurrentUser.Count() != 0)
-            {
-                return View(OrdersCurrentUser);
-            }
-            return View("Список заказов пуст");
+            return View(OrdersCurrentUser);            
         }
 
         public ActionResult DeleteOrder(int id)
