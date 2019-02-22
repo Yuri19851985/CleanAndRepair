@@ -18,5 +18,6 @@ namespace CleanAndRepair.Models
 
         public bool Complete { get; set; }
         public double TotalPrice { get; set; }
+        public virtual Worker Worker { get; set; } // рабочий который будет выполнять заказ
     }
 }

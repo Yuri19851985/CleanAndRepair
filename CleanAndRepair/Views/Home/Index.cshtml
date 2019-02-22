@@ -3,7 +3,10 @@
         <ul class="nav nav-pills nav-stacked">
             @foreach (var g in Model)
             {
+                if (g.Name != null)
+                {
                 <li>@Ajax.ActionLink(g.Name, "ShowServices", new { id = g.Id }, new AjaxOptions { UpdateTargetId = "groupservice" })</li>
+                }
             }
         </ul>
     </div>

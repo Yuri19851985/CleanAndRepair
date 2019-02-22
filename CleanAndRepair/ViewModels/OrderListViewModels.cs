@@ -8,7 +8,7 @@ namespace CleanAndRepair.ViewModels
 {
     public class OrderListViewModels
     {
-        public Order Order { get; set; }
-        public Service Service { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Service Service { get; set; }
     }
 }
