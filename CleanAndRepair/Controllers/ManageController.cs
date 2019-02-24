@@ -324,36 +324,7 @@ namespace CleanAndRepair.Controllers
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
 
-        private ApplicationDbContext db = new ApplicationDbContext(); 
-
-        public ActionResult OrderListIdentityUser()
-        {
-            string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
-            var CurrentIdentityUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
-            // выбираем список заказов с Id текущего пользователя
-            var OrdersCurrentUser = db.Orders.Where(order => order.User.Id == CurrentIdentityUser.Id);
-            foreach(var item in OrdersCurrentUser)
-            {
-                var OrderService = db.Services.FirstOrDefault(service => service.Id == item.ServiceOrder.Id);
-                if(OrderService != null)
-                {
-                    item.ServiceOrder = OrderService;
-                }
-            }
-            return View(OrdersCurrentUser);            
-        }
-
-        public ActionResult DeleteOrder(int id)
-        {
-            Order OrderDelete = db.Orders.Find(id);
-            if (OrderDelete != null)
-            {
-                db.Orders.Remove(OrderDelete);
-                db.SaveChanges();
-            }
-            else return View("Error. Такого заказа не существует!");
-            return RedirectToAction("OrderListIdentityUser");
-        }
+       
         
         protected override void Dispose(bool disposing)
         {

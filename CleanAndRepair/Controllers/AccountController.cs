@@ -160,11 +160,23 @@ namespace CleanAndRepair.Controllers
                 if (result.Succeeded)
                 {
                     // если регистрируется первый пользователь то роль Админ, все последующие User
-                    if(db.Users.Count() == 1)
+                    if (db.Users.Count() == 1)
                     {
                         await UserManager.AddToRoleAsync(user.Id, "admin");
+                        // найдем нашего юзера через ApplicationDbContext и заполним RoleName 
+                        //(друго способа не придумал чтобы работать с ролью юзера через мой контекст)
+                        var UserReg = db.Users.FirstOrDefault(u => u.Id == user.Id);
+                        UserReg.RoleName = "admin";
+                        db.SaveChanges();
                     }
-                    else await UserManager.AddToRoleAsync(user.Id, "user");
+                    else
+                    {
+                        await UserManager.AddToRoleAsync(user.Id, "user");
+                        var UserReg = db.Users.FirstOrDefault(u => u.Id == user.Id);
+                        UserReg.RoleName = "user";
+                        db.SaveChanges();
+                    }
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);                       
                     return RedirectToAction("Index", "Home");
                 }

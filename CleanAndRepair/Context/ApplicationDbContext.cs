@@ -23,7 +23,6 @@ namespace CleanAndRepair.Context
         }
 
         public DbSet<Service> Services { get; set; }
-        public DbSet<Worker> Workers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<GroupService> Groups { get; set; }

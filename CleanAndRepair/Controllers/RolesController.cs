@@ -1,4 +1,6 @@
-﻿using CleanAndRepair.Models;
+﻿using CleanAndRepair.Context;
+using CleanAndRepair.Models;
+using CleanAndRepair.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -94,5 +96,29 @@ namespace CleanAndRepair.Controllers
             }
             return RedirectToAction("Index");
         }
+
+    //    ApplicationDbContext db = new ApplicationDbContext();
+
+    //    [Authorize(Roles = "admin")]
+    //    public ActionResult UserList(int id)
+    //    {
+    //        List<UserListViewModel> models = new List<UserListViewModel>();
+
+    //        var Users = db.Users.Where(x => x.Roles.Select(y => y.Id).Contains(id))
+    //.ToList();
+    //        foreach (var item in Users)
+    //        {
+    //            UserListViewModel UnitModel = new UserListViewModel();
+    //            UnitModel.user = item;
+    //            // получаем заказы текущего рабочего
+    //            var Orders = db.Orders.Where(order => order.Worker.Id == item.Id);
+    //            if (Orders != null)
+    //            {
+    //                UnitModel.CountOrders = Orders.Count();
+    //            }
+    //            models.Add(UnitModel);
+    //        }
+    //        return View(models);
+    //    }
     }
 }

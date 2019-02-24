@@ -196,6 +196,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WorkerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,14 +208,12 @@
     <Compile Include="Models\Discount.cs" />
     <Compile Include="Models\GroupService.cs" />
     <Compile Include="Models\Service.cs" />
-    <Compile Include="Models\Worker.cs" />
     <Compile Include="ViewModels\CalcCleanViewModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
-    <Compile Include="ViewModels\OrderListViewModels.cs" />
     <Compile Include="ViewModels\RoleViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\WorkerListViewModels.cs" />
+    <Compile Include="ViewModels\UserListViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -283,19 +283,24 @@
     <Content Include="Views\Home\ServiceOrderConfirm.cshtml" />
     <Content Include="Views\Manage\OrderListIdentityUser.cshtml" />
     <Content Include="Views\Home\BookService.cshtml" />
-    <Content Include="Views\Admin\WorkerList.cshtml" />
-    <Content Include="Views\Admin\CreateWorker.cshtml" />
-    <Content Include="Views\Admin\EditWorker.cshtml" />
-    <Content Include="Views\Admin\DetailsWorker.cshtml" />
+    <Content Include="Views\Admin\UserList.cshtml" />
+    <Content Include="Views\Admin\EditUser.cshtml" />
+    <Content Include="Views\Admin\DetailsUser.cshtml" />
     <Content Include="Views\Admin\ServiceList.cshtml" />
     <Content Include="Views\Admin\GroupList.cshtml" />
     <Content Include="Views\Admin\CreateGroup.cshtml" />
     <Content Include="Views\Admin\EditGroup.cshtml" />
     <Content Include="Views\Admin\CreateService.cshtml" />
     <Content Include="Views\Admin\EditService.cshtml" />
+    <Content Include="Views\Admin\UserOrders.cshtml" />
+    <Content Include="Views\Admin\WorkerList.cshtml" />
+    <Content Include="Views\Admin\EditWorker.cshtml" />
+    <Content Include="Views\User\UserProfile.cshtml" />
+    <Content Include="Views\User\EditProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Worker\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

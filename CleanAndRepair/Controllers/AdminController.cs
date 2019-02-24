@@ -18,18 +18,19 @@ namespace CleanAndRepair.Controllers
             return View();
         }
 
+        // действия админа с юзерами
         [Authorize(Roles = "admin")]
-        public ActionResult WorkerList()
+        public ActionResult UserList(string rolename="user")
         {
-            List<WorkerListViewModel> models = new List<WorkerListViewModel>();
-            var Workers = db.Workers;
-            foreach(var item in Workers)
+            List<UserListViewModel> models = new List<UserListViewModel>();
+            var Users = db.Users.Where(role => role.RoleName == rolename);
+            foreach (var item in Users)
             {
-                WorkerListViewModel UnitModel = new WorkerListViewModel();
-                UnitModel.worker = item;                
+                UserListViewModel UnitModel = new UserListViewModel();
+                UnitModel.user = item;
                 // получаем заказы текущего рабочего
                 var Orders = db.Orders.Where(order => order.Worker.Id == item.Id);
-                if(Orders != null)
+                if (Orders != null)
                 {
                     UnitModel.CountOrders = Orders.Count();
                 }
@@ -39,87 +40,134 @@ namespace CleanAndRepair.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult CreateWorker()
+        public ActionResult DeleteUser(string id)
         {
-            return View();
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "admin")]
-        public ActionResult CreateWorker(Worker model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-            if (db.Workers.FirstOrDefault(m => m.Phone == model.Phone) != null)
-            {
-                ViewBag.Message = "Пользователь с таким телефоном уже существует в базе";
-                return View(model);
-            }
-            var NewWorker = new Worker();
-            NewWorker = model;
-            NewWorker.Orders = new List<Order>();
-            db.Workers.Add(NewWorker);
-            db.SaveChanges();
-            return RedirectToAction("WorkerList");
-        }
-
-        [Authorize(Roles = "admin")]
-        public ActionResult DeleteWorker(int id)
-        {
-            var WorkerDel = db.Workers.FirstOrDefault(i => i.Id == id);
-            if (WorkerDel == null)
+            var UserDel = db.Users.FirstOrDefault(i => i.Id == id);
+            if (UserDel == null)
             {
                 return View("Error. Worker not found!");
             }
-            db.Workers.Remove(WorkerDel);
+            db.Users.Remove(UserDel);
             db.SaveChanges();
-            return RedirectToAction("WorkerList");
+            return RedirectToAction("UserList");
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult EditWorker(int id)
+        public ActionResult EditUser(string id)
         {
-            var WorkerEdit = db.Workers.FirstOrDefault(i => i.Id == id);
-            if (WorkerEdit == null)
+            var UserEdit = db.Users.FirstOrDefault(i => i.Id == id);
+            if (UserEdit == null)
             {
                 return View("Error. Worker not found!");
             }
-            return View(WorkerEdit);
+            SelectList RoleList = new SelectList(db.Roles, "Name", "Name");
+            if (RoleList == null)
+            {
+                return View("Error. Role not found!");
+            }
+            ViewBag.RoleList = RoleList;
+            return View(UserEdit);
         }
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public ActionResult EditWorker(Worker model)
+        public ActionResult EditUser(ApplicationUser model)
         {
-            var WorkerEdit = db.Workers.FirstOrDefault(i => i.Id == model.Id);
-            if (WorkerEdit == null)
+            var UserEdit = db.Users.FirstOrDefault(i => i.Id == model.Id);
+            if (UserEdit == null)
             {
                 return View("Error. Worker not found!");
             }
-            WorkerEdit.Name = model.Name;
-            WorkerEdit.Phone = model.Phone;
-            WorkerEdit.Raiting = model.Raiting;
+            UserEdit.UserName = model.UserName;
+            UserEdit.Email = model.Email;
+            UserEdit.PhoneNumber = model.PhoneNumber;
+            UserEdit.RoleName = model.RoleName;
+            UserEdit.Address = model.Address;
+            UserEdit.Raiting = model.Raiting;
+            db.SaveChanges();
+            return RedirectToAction("UserList");
+        }
+
+        // действия админа с работниками
+        [Authorize(Roles = "admin")]
+        public ActionResult WorkerList()
+        {
+            return UserList("worker");
+        }
+        [Authorize(Roles = "admin")]
+
+        public ActionResult DeleteWorker(string id)
+        {
+            var UserDel = db.Users.FirstOrDefault(i => i.Id == id);
+            if (UserDel == null)
+            {
+                return View("Error. Worker not found!");
+            }
+            db.Users.Remove(UserDel);
             db.SaveChanges();
             return RedirectToAction("WorkerList");
         }
 
         [Authorize(Roles = "admin")]
-        public ActionResult DetailsWorker(int id)
+        public ActionResult EditWorker(string id)
         {
-            WorkerDetailsViewModel model = new WorkerDetailsViewModel();
-            model.worker = db.Workers.FirstOrDefault(i => i.Id == id);
-            var Orders = db.Orders.Where(order => order.Worker.Id == id);
-            if (Orders != null)
+            var UserEdit = db.Users.FirstOrDefault(i => i.Id == id);
+            if (UserEdit == null)
             {
-                model.Orders.AddRange(Orders);
+                return View("Error. Worker not found!");
             }
-            else { return View(ViewBag.Message = "Список заказов пуст"); }
-
-            return View(model);
+            SelectList RoleList = new SelectList(db.Roles, "Name", "Name");
+            if (RoleList == null)
+            {
+                return View("Error. Role not found!");
+            }
+            ViewBag.RoleList = RoleList;
+            return View(UserEdit);
         }
 
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public ActionResult EditWorker(ApplicationUser model)
+        {
+            var UserEdit = db.Users.FirstOrDefault(i => i.Id == model.Id);
+            if (UserEdit == null)
+            {
+                return View("Error. Worker not found!");
+            }
+            UserEdit.UserName = model.UserName;
+            UserEdit.Email = model.Email;
+            UserEdit.PhoneNumber = model.PhoneNumber;
+            UserEdit.RoleName = model.RoleName;
+            UserEdit.Address = model.Address;
+            UserEdit.Raiting = model.Raiting;
+            db.SaveChanges();
+            return RedirectToAction("WorkerList");
+        }
+        // действия админа с заказами
+        [Authorize(Roles = "admin")]
+        public ActionResult UserOrders(string UserId)
+        {
+            var Orders = db.Orders.Where(order => order.User.Id == UserId);
+            if (Orders.Count() != 0)
+            {
+                return View(Orders);
+            }
+            return View();            
+        }
+
+        public ActionResult DeleteOrder(int id)
+        {
+            Order OrderDelete = db.Orders.Find(id);
+            if (OrderDelete != null)
+            {
+                db.Orders.Remove(OrderDelete);
+                db.SaveChanges();
+            }
+            else return View("Error. Такого заказа не существует!");
+            return RedirectToAction("UserOrders");
+        }
+
+        //действия админа с услугами
         [Authorize(Roles = "admin")]
         public ActionResult ServiceList()
         {
@@ -222,7 +270,7 @@ namespace CleanAndRepair.Controllers
             return RedirectToAction("ServiceList");
         }
 
-
+        //действия админа с группами
         [Authorize(Roles = "admin")]
         public ActionResult GroupList()
         {
@@ -248,7 +296,7 @@ namespace CleanAndRepair.Controllers
             {
                 return View(model);
             }
-            if (db.Workers.FirstOrDefault(m => m.Name == model.Name) != null)
+            if (db.Groups.FirstOrDefault(m => m.Name == model.Name) != null)
             {
                 ViewBag.Message = "Такая группа уже существует в базе";
                 return View(model);

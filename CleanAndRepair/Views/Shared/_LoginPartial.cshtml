@@ -15,21 +15,21 @@
                 </a>
                 <ul class="dropdown-menu">
                     @if (User.IsInRole("worker"))
-                {
-                <li><a href="/Index/Manage">Список заказов</a></li>
-                <li><a href="/Manage/OrderListIdentityUser">Достижения</a></li>
+    {
+                <li><a href="/Worker/OrderListIdentityUser">Список заказов</a></li>
+                <li><a href="/Worker/">Рейтинг</a></li>
 }
 else if (User.IsInRole("admin"))
 {
-                <li><a href="/Admin/UserList">Список пользователей</a></li>
-                <li><a href="/Admin/WorkerList">Список работников</a></li>
+                <li>@Html.ActionLink("Список пользователей", "UserList", "Admin")</li>
+                <li>@Html.ActionLink("Список работников", "WorkerList", "Admin")</li>
                 <li><a href="/Admin/ServiceList">Справочник услуг</a></li>
                 <li><a href="/Admin/GroupList">Справочник групп</a></li>
 }
-else
+else if (User.IsInRole("user"))
 {
-                <li><a href="/Index/Manage">Профиль</a></li>
-                <li><a href="/Manage/OrderListIdentityUser">Мои заказы</a></li>
+                <li><a href="/User/UserProfile">Профиль</a></li>
+                <li><a href="/User/OrderListIdentityUser">Мои заказы</a></li>
 }
                 </ul>
             </li>
