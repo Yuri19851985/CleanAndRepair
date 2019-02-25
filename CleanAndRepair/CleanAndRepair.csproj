@@ -297,10 +297,13 @@
     <Content Include="Views\Admin\EditWorker.cshtml" />
     <Content Include="Views\User\UserProfile.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="Views\User\OrderListIdentityUser.cshtml" />
+    <Content Include="Views\Worker\WorkerProfile.cshtml" />
+    <Content Include="Views\Worker\EditProfile.cshtml" />
+    <Content Include="Views\Worker\OrderListIdentityWorker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Worker\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

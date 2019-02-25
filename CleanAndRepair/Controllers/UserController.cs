@@ -1,5 +1,6 @@
 ﻿using CleanAndRepair.Context;
 using CleanAndRepair.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,16 @@ namespace CleanAndRepair.Controllers
         [Authorize(Roles = "user")]
         public ActionResult UserProfile()
         {
-            string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
-            var CurrentIdentityUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
-            return View(CurrentIdentityUser);
+            string currentUserId = User.Identity.GetUserId();
+            var UserEdit = db.Users.FirstOrDefault(x => x.Id == currentUserId);                     
+            return View(UserEdit);
         }
 
         [Authorize(Roles = "user")]
         public ActionResult EditProfile()
         {
-            string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
-            var UserEdit = db.Users.FirstOrDefault(i => i.UserName == NameCurrentUser);
+            string currentUserId = User.Identity.GetUserId();
+            var UserEdit = db.Users.FirstOrDefault(x => x.Id == currentUserId);
             if (UserEdit == null)
             {
                 return View("Error. User not found!");
@@ -37,8 +38,7 @@ namespace CleanAndRepair.Controllers
         [HttpPost]
         public ActionResult EditProfile(ApplicationUser model)
         {
-            string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
-            var UserEdit = db.Users.FirstOrDefault(i => i.UserName == NameCurrentUser);
+            var UserEdit = db.Users.FirstOrDefault(i => i.Id == model.Id);
             if (UserEdit == null)
             {
                 return View("Error. Worker not found!");
@@ -49,14 +49,15 @@ namespace CleanAndRepair.Controllers
             UserEdit.Address = model.Address;
             UserEdit.Raiting = model.Raiting;
             db.SaveChanges();
+            var Userid = UserEdit.Id;
             return RedirectToAction("UserProfile");
         }
 
         [Authorize(Roles = "user")]
         public ActionResult OrderListIdentityUser()
         {
-            string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
-            var CurrentIdentityUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
+            string currentUserId = User.Identity.GetUserId();
+            var CurrentIdentityUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
             // выбираем список заказов с Id текущего пользователя
             var OrdersCurrentUser = db.Orders.Where(order => order.User.Id == CurrentIdentityUser.Id);
             foreach (var item in OrdersCurrentUser)

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CleanAndRepair.Models.Order>
+
+@{
+    ViewBag.Title = "OrderListIdentityUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Мои заказы</h2>
+
+@if (Model.Count() == 0)
+{
+    <h4>Список заказов пуст</h4>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Услуга")
+            </th>
+            <th>
+                @Html.DisplayName("Дата заказа")
+            </th>
+            <th>
+                @Html.DisplayName("Дата выполнения")
+            </th>
+            <th>
+                @Html.DisplayName("Статус")
+            </th>
+            <th>
+                @Html.DisplayName("Сумма в руб")
+            </th>
+            <th>
+                @Html.DisplayName("Действия")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceOrder.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrderCheck)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrderComplete)
+                </td>
+                <td>
+                    @if (item.Complete == true)
+                    {
+                        <p>выполнен</p>
+                    }
+                    else
+                    { <p>ожидается</p>}
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.ActionLink("Отменить", "DeleteOrder", new { id = item.Id })
+                </td>
+            </tr>
+            <tr id="DetailsOrderInf"></tr>
+        }
+    </table>
+}
