@@ -37,7 +37,8 @@ namespace CleanAndRepair.Controllers
         [HttpPost]
         public ActionResult EditProfile(ApplicationUser model)
         {
-            var UserEdit = db.Users.FirstOrDefault(i => i.Id == model.Id);
+            string NameCurrentUser = System.Web.HttpContext.Current.User.Identity.Name;
+            var UserEdit = db.Users.FirstOrDefault(i => i.UserName == NameCurrentUser);
             if (UserEdit == null)
             {
                 return View("Error. Worker not found!");
@@ -45,7 +46,6 @@ namespace CleanAndRepair.Controllers
             UserEdit.UserName = model.UserName;
             UserEdit.Email = model.Email;
             UserEdit.PhoneNumber = model.PhoneNumber;
-            UserEdit.RoleName = model.RoleName;
             UserEdit.Address = model.Address;
             UserEdit.Raiting = model.Raiting;
             db.SaveChanges();
