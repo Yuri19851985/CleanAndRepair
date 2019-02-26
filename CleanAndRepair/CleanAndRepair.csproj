@@ -281,7 +281,6 @@
     <Content Include="Views\Home\BookServiceClean.cshtml" />
     <Content Include="Views\Home\BookServiceComplete.cshtml" />
     <Content Include="Views\Home\ServiceOrderConfirm.cshtml" />
-    <Content Include="Views\Manage\OrderListIdentityUser.cshtml" />
     <Content Include="Views\Home\BookService.cshtml" />
     <Content Include="Views\Admin\UserList.cshtml" />
     <Content Include="Views\Admin\EditUser.cshtml" />

@@ -29,7 +29,7 @@ namespace CleanAndRepair.Controllers
                 UserListViewModel UnitModel = new UserListViewModel();
                 UnitModel.user = item;
                 // получаем заказы текущего рабочего
-                var Orders = db.Orders.Where(order => order.Worker.Id == item.Id);
+                var Orders = db.Orders.Where(order => order.User.Id == item.Id);
                 if (Orders != null)
                 {
                     UnitModel.CountOrders = Orders.Count();
@@ -143,11 +143,12 @@ namespace CleanAndRepair.Controllers
             db.SaveChanges();
             return RedirectToAction("WorkerList");
         }
+
         // действия админа с заказами
         [Authorize(Roles = "admin")]
-        public ActionResult UserOrders(string UserId)
+        public ActionResult UserOrders(string id)
         {
-            var Orders = db.Orders.Where(order => order.User.Id == UserId);
+            var Orders = db.Orders.Where(order => order.User.Id == id);
             if (Orders.Count() != 0)
             {
                 return View(Orders);
@@ -155,7 +156,17 @@ namespace CleanAndRepair.Controllers
             return View();            
         }
 
-        public ActionResult DeleteOrder(int id)
+        public ActionResult WorkerOrders(string id)
+        {
+            var Orders = db.Orders.Where(order => order.Worker.Id == id);
+            if (Orders.Count() != 0)
+            {
+                return View(Orders);
+            }
+            return View();
+        }
+
+        public ActionResult DeleteOrder(int id, string UserId)
         {
             Order OrderDelete = db.Orders.Find(id);
             if (OrderDelete != null)
@@ -164,7 +175,7 @@ namespace CleanAndRepair.Controllers
                 db.SaveChanges();
             }
             else return View("Error. Такого заказа не существует!");
-            return RedirectToAction("UserOrders");
+            return RedirectToAction("UserList");
         }
 
         //действия админа с услугами
