@@ -187,6 +187,20 @@ namespace CleanAndRepair.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeRole(ApplicationUser user, string rolename)
+        {
+            if(user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }         
+            // если регистрируется первый пользователь то роль Админ, все последующие User
+            await UserManager.AddToRoleAsync(user.Id, rolename);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]

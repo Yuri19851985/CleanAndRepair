@@ -86,6 +86,7 @@ namespace CleanAndRepair.Controllers
             UserEdit.RoleName = model.RoleName;
             UserEdit.Address = model.Address;
             UserEdit.Raiting = model.Raiting;
+            RedirectToAction("ChangeRole", "Account", new { user = UserEdit, rolename = model.RoleName });
             db.SaveChanges();
             return RedirectToAction("UserList");
         }

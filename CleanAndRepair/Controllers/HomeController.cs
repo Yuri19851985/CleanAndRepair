@@ -152,11 +152,14 @@ namespace CleanAndRepair.Controllers
                     var CurrentUser = db.Users.FirstOrDefault(User => User.UserName.Equals(NameCurrentUser));
                     if(CurrentUser!=null)
                     {
-                        //                        CurrentUser.Orders.Add(NewOrder);
                         NewOrder.User = CurrentUser;
                         db.Orders.Add(NewOrder);
-                        db.SaveChanges();
                         ViewBag.UserName = NameCurrentUser;
+
+                        // отправка заказа рабочему
+                        var Workers = db.Users.Where(role => role.RoleName == "worker");
+
+                        db.SaveChanges();
                         return View("BookServiceComplete");
                     }                   
                 }
