@@ -14,11 +14,16 @@
     </div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayName("Имя")
+            @Html.DisplayName("Логин")
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayName("Имя")
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
         </dd>
         <dt>
             @Html.DisplayName("Email")

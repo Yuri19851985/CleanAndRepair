@@ -38,18 +38,18 @@ namespace CleanAndRepair.Controllers
         [HttpPost]
         public ActionResult EditProfile(ApplicationUser model)
         {
-            var UserEdit = db.Users.FirstOrDefault(i => i.Id == model.Id);
+            string currentUserId = User.Identity.GetUserId();
+            var UserEdit = db.Users.FirstOrDefault(x => x.Id == currentUserId);
             if (UserEdit == null)
             {
                 return View("Error. Worker not found!");
             }
-            UserEdit.UserName = model.UserName;
+            UserEdit.FullName = model.FullName;
             UserEdit.Email = model.Email;
             UserEdit.PhoneNumber = model.PhoneNumber;
             UserEdit.Address = model.Address;
             UserEdit.Raiting = model.Raiting;
             db.SaveChanges();
-            var Userid = UserEdit.Id;
             return RedirectToAction("UserProfile");
         }
 

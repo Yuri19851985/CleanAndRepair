@@ -14,7 +14,7 @@ namespace CleanAndRepair.Models
         public string Address { get; set; }
         public List<Order> Orders = new List<Order>();
         public string RoleName { get; set; }
-
+        public string FullName { get; set; }
         // для пользователя с ролью worker
         public int Raiting { get; set; }
 

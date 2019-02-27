@@ -1,6 +1,7 @@
 ﻿using CleanAndRepair.Context;
 using CleanAndRepair.Models;
 using CleanAndRepair.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,8 +46,9 @@ namespace CleanAndRepair.Controllers
             var UserDel = db.Users.FirstOrDefault(i => i.Id == id);
             if (UserDel == null)
             {
-                return View("Error. Worker not found!");
-            }
+                ViewBag.Message = "Error. Worker not found!";
+                return View();
+            }          
             db.Users.Remove(UserDel);
             db.SaveChanges();
             return RedirectToAction("UserList");
@@ -78,7 +80,7 @@ namespace CleanAndRepair.Controllers
             {
                 return View("Error. Worker not found!");
             }
-            UserEdit.UserName = model.UserName;
+            UserEdit.FullName = model.FullName;
             UserEdit.Email = model.Email;
             UserEdit.PhoneNumber = model.PhoneNumber;
             UserEdit.RoleName = model.RoleName;
@@ -92,7 +94,7 @@ namespace CleanAndRepair.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult WorkerList()
         {
-            return UserList("worker");
+            return RedirectToAction("UserList", new { rolename = "worker" });
         }
         [Authorize(Roles = "admin")]
 
@@ -111,7 +113,8 @@ namespace CleanAndRepair.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult EditWorker(string id)
         {
-            var UserEdit = db.Users.FirstOrDefault(i => i.Id == id);
+            string currentUserId = User.Identity.GetUserId();
+            var UserEdit = db.Users.FirstOrDefault(x => x.Id == currentUserId);
             if (UserEdit == null)
             {
                 return View("Error. Worker not found!");
@@ -134,7 +137,7 @@ namespace CleanAndRepair.Controllers
             {
                 return View("Error. Worker not found!");
             }
-            UserEdit.UserName = model.UserName;
+            UserEdit.FullName = model.FullName;
             UserEdit.Email = model.Email;
             UserEdit.PhoneNumber = model.PhoneNumber;
             UserEdit.RoleName = model.RoleName;
