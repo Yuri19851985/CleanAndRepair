@@ -16,8 +16,8 @@
                 <ul class="dropdown-menu">
                     @if (User.IsInRole("worker"))
     {
-                <li><a href="/Worker/OrderListIdentityUser">Список заказов</a></li>
-                <li><a href="/Worker/">Рейтинг</a></li>
+                <li><a href="/Worker/OrderListIdentityWorker">Список заказов</a></li>
+                <li><a href="/Worker/GetRaiting">Рейтинг</a></li>
 }
 else if (User.IsInRole("admin"))
 {

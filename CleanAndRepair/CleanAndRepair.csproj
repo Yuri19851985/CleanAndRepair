@@ -300,6 +300,7 @@
     <Content Include="Views\Worker\WorkerProfile.cshtml" />
     <Content Include="Views\Worker\EditProfile.cshtml" />
     <Content Include="Views\Worker\OrderListIdentityWorker.cshtml" />
+    <Content Include="Views\Worker\GetRaiting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

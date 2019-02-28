@@ -2,6 +2,7 @@
 using CleanAndRepair.Models;
 using CleanAndRepair.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,11 +85,27 @@ namespace CleanAndRepair.Controllers
             UserEdit.Email = model.Email;
             UserEdit.PhoneNumber = model.PhoneNumber;
             UserEdit.RoleName = model.RoleName;
+            ChangeRoleUser(UserEdit.Id, UserEdit.RoleName); // замена роли пользователя
             UserEdit.Address = model.Address;
             UserEdit.Raiting = model.Raiting;
-            RedirectToAction("ChangeRole", "Account", new { user = UserEdit, rolename = model.RoleName });
-            db.SaveChanges();
+            db.SaveChanges();           
+
             return RedirectToAction("UserList");
+        }
+
+        // замена роли пользователя
+        public bool ChangeRoleUser(string UserId, string RoleName)
+        {
+            ApplicationUserManager userManager = HttpContext.GetOwinContext()
+                                            .GetUserManager<ApplicationUserManager>();
+            var Roles = userManager.GetRoles(UserId);
+            userManager.RemoveFromRoles(UserId, Roles.ToArray());
+            var result = userManager.AddToRole(UserId, RoleName);
+            if (result != null)
+            {
+                return true;
+            }
+            return false;
         }
 
         // действия админа с работниками
@@ -142,6 +159,7 @@ namespace CleanAndRepair.Controllers
             UserEdit.Email = model.Email;
             UserEdit.PhoneNumber = model.PhoneNumber;
             UserEdit.RoleName = model.RoleName;
+            ChangeRoleUser(UserEdit.Id, UserEdit.RoleName); // замена роли работника
             UserEdit.Address = model.Address;
             UserEdit.Raiting = model.Raiting;
             db.SaveChanges();

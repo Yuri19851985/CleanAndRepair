@@ -71,6 +71,12 @@ namespace CleanAndRepair.Controllers
             }
             return View(OrdersCurrentUser);
         }
-
+        public ActionResult GetRaiting()
+        {
+            string currentUserId = User.Identity.GetUserId();
+            var CurrentIdentityUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+            ViewBag.RaitingValue = CurrentIdentityUser.Raiting.ToString();
+            return View();
+        }
     }
 }
