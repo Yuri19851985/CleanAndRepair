@@ -301,6 +301,8 @@
     <Content Include="Views\Worker\EditProfile.cshtml" />
     <Content Include="Views\Worker\OrderListIdentityWorker.cshtml" />
     <Content Include="Views\Worker\GetRaiting.cshtml" />
+    <Content Include="Views\Worker\OrderDetails.cshtml" />
+    <Content Include="Views\User\SetRaitingForWorker.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

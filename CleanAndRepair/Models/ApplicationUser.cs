@@ -16,7 +16,7 @@ namespace CleanAndRepair.Models
         public string RoleName { get; set; }
         public string FullName { get; set; }
         // для пользователя с ролью worker
-        public int Raiting { get; set; }
+        public double Raiting { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

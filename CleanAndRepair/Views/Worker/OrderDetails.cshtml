@@ -1,0 +1,37 @@
+﻿@model CleanAndRepair.Models.Order
+
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Подробности заказа</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Пользователь оценил вашу работу на:")
+        </dt>   
+        @if (Model.UserSetRaiting != 0)
+        {
+        <dd>
+            @Html.DisplayFor(model => model.UserSetRaiting);
+        </dd>
+        }
+        else
+        {
+        <dd>
+            Пользователь пока не поставил вам оценку
+        </dd>
+        }      
+        <dt>
+            @Html.DisplayName("Ваш общий рейтинг составляет:")
+        </dt>
+
+        <dd>
+            @ViewBag.RaitingValue
+        </dd>
+    </dl>
+</div>
+

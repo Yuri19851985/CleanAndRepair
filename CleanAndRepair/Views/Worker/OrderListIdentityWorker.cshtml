@@ -19,6 +19,12 @@ else
                 @Html.DisplayName("Услуга")
             </th>
             <th>
+                @Html.DisplayName("Адрес")
+            </th>
+            <th>
+                @Html.DisplayName("Телефон клиента")
+            </th>
+            <th>
                 @Html.DisplayName("Дата заказа")
             </th>
             <th>
@@ -34,28 +40,41 @@ else
 
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceOrder.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOrderCheck)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOrderComplete)
+            </td>
+            @if (item.Complete == true)
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.ServiceOrder.Name)
+                    <p>выполнен</p>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateOrderCheck)
+                    @Html.ActionLink("Подробности", "OrderDetails", new { id = item.Id })
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOrderComplete)
-                </td>
-                <td>
-                    @if (item.Complete == true)
-                    {
-                        <p>выполнен</p>
-                    }
-                    else
-                    { <p>ожидается</p>}
-                </td>              
-                <td>
-                    @Html.ActionLink("Отменить", "DeleteOrder", new { id = item.Id })
-                </td>
-            </tr>
+            }
+            else
+            {
+                    <td>
+                        <p>ожидается</p>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Выполнен", "OrderComplete", new { id = item.Id })
+                    </td>
+            }           
+        </tr>
             <tr id="DetailsOrderInf"></tr>
         }
     </table>

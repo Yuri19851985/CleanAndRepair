@@ -25,10 +25,10 @@ else
                 @Html.DisplayName("Дата выполнения")
             </th>
             <th>
-                @Html.DisplayName("Статус")
+                @Html.DisplayName("Сумма в руб")
             </th>
             <th>
-                @Html.DisplayName("Сумма в руб")
+                @Html.DisplayName("Статус")
             </th>
             <th>
                 @Html.DisplayName("Действия")
@@ -37,30 +37,37 @@ else
 
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceOrder.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOrderCheck)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOrderComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            @if (item.Complete == true)
+                {
                 <td>
-                    @Html.DisplayFor(modelItem => item.ServiceOrder.Name)
+                    <p>выполнен</p>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateOrderCheck)
+                    @Html.ActionLink("Оценить работника", "SetRaitingForWorker", new { id = item.Id })
                 </td>
+                }
+                else
+                {
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateOrderComplete)
-                </td>
-                <td>
-                    @if (item.Complete == true)
-                    {
-                        <p>выполнен</p>
-                    }
-                    else
-                    { <p>ожидается</p>}
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                    <p>ожидается</p>
                 </td>
                 <td>
                     @Html.ActionLink("Отменить", "DeleteOrder", new { id = item.Id })
                 </td>
+                }
             </tr>
             <tr id="DetailsOrderInf"></tr>
         }

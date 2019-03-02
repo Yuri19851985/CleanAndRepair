@@ -150,14 +150,18 @@ namespace CleanAndRepair.Controllers
                 if (CurrentUser != null)
                 {
                     NewOrder.User = CurrentUser;
-                    db.Orders.Add(NewOrder);
                     ViewBag.UserName = CurrentUser.UserName;
                     // отправка заказа рабочему
                     // находим рабочего у которого меньше всех заказов
                     ApplicationUser WorkerMin = new ApplicationUser();
                     WorkerMin = FindWorkerOrdersMin();
                     if (WorkerMin != null)
+                    {
                         NewOrder.Worker = WorkerMin;
+                        db.Orders.Add(NewOrder);
+                        var Worker = db.Users.FirstOrDefault(w => w.Id == WorkerMin.Id);
+                        Worker.Orders.Add(NewOrder);
+                    }
                     else View("Error! worker didn't receive the order");
                     db.SaveChanges();
                     return View("BookServiceComplete");

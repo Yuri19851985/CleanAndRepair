@@ -84,6 +84,34 @@ namespace CleanAndRepair.Controllers
             return RedirectToAction("OrderListIdentityUser");
         }
 
+        [Authorize(Roles = "user")]
+        public ActionResult SetRaitingForWorker(int id)
+        {
+            return View();
+        }
 
+        [Authorize(Roles = "user")]
+        [HttpPost]
+        public ActionResult SetRaitingForWorker(Order order)
+        {
+            if(order.UserSetRaiting == 0)
+            {
+                return RedirectToAction("OrderListIdentityUser");
+            }
+            var Order = db.Orders.FirstOrDefault(or => or.Id == order.Id);
+            if (Order == null)
+                return RedirectToAction("OrderListIdentityUser");
+            Order.UserSetRaiting = order.UserSetRaiting;
+            var Worker = db.Users.FirstOrDefault(user => user.Id == Order.Worker.Id);
+            if(Worker == null)
+                return RedirectToAction("OrderListIdentityUser");
+            // вычисление рейтинга рабочего
+            var WorkerOrders = db.Orders.Where(ord => ord.Worker.Id == Worker.Id);
+            if (WorkerOrders == null)
+                return RedirectToAction("OrderListIdentityUser");
+            Worker.Raiting = WorkerOrders.Sum(ord => ord.UserSetRaiting)/WorkerOrders.Count();
+            db.SaveChanges();
+            return View();
+        }
     }
 }

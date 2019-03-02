@@ -60,7 +60,7 @@ namespace CleanAndRepair.Controllers
             string currentUserId = User.Identity.GetUserId();
             var CurrentIdentityUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
             // выбираем список заказов с Id текущего пользователя
-            var OrdersCurrentUser = db.Orders.Where(order => order.User.Id == CurrentIdentityUser.Id);
+            var OrdersCurrentUser = db.Orders.Where(order => order.Worker.Id == CurrentIdentityUser.Id);
             foreach (var item in OrdersCurrentUser)
             {
                 var OrderService = db.Services.FirstOrDefault(service => service.Id == item.ServiceOrder.Id);
@@ -73,9 +73,36 @@ namespace CleanAndRepair.Controllers
         }
         public ActionResult GetRaiting()
         {
+            ViewBag.RaitingValue = GetRaitingValueCurrentUser().ToString();
+            return View();
+        }
+
+        public double GetRaitingValueCurrentUser()
+        {
             string currentUserId = User.Identity.GetUserId();
             var CurrentIdentityUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
-            ViewBag.RaitingValue = CurrentIdentityUser.Raiting.ToString();
+            double raiting = CurrentIdentityUser.Raiting;
+            return raiting;
+        }
+
+        public ActionResult OrderComplete(int id)
+        {
+            var Order = db.Orders.FirstOrDefault(or => or.Id == id);
+            if(Order != null && Order.Complete == false)
+            {
+                Order.Complete = true;
+                db.SaveChanges();
+            }
+            return RedirectToAction("OrderListIdentityWorker");
+        }
+        public ActionResult OrderDetails(int id)
+        {
+            var Order = db.Orders.FirstOrDefault(or => or.Id == id);
+            if (Order != null)
+            {
+                ViewBag.RaitingValue = GetRaitingValueCurrentUser().ToString();
+                return View(Order);
+            }
             return View();
         }
     }

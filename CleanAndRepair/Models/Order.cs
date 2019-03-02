@@ -10,6 +10,7 @@ namespace CleanAndRepair.Models
     {
         public int Id { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public double  UserSetRaiting { get; set; }
         public virtual Service ServiceOrder { get; set; }
         public DateTime DateOrderCheck { get; set; }
 
