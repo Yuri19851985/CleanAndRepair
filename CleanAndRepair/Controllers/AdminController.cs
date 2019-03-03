@@ -110,9 +110,23 @@ namespace CleanAndRepair.Controllers
 
         // действия админа с работниками
         [Authorize(Roles = "admin")]
-        public ActionResult WorkerList()
+        public ActionResult WorkerList(string rolename = "worker")
         {
-            return RedirectToAction("UserList", new { rolename = "worker" });
+            List<UserListViewModel> models = new List<UserListViewModel>();
+            var Users = db.Users.Where(role => role.RoleName == rolename);
+            foreach (var item in Users)
+            {
+                UserListViewModel UnitModel = new UserListViewModel();
+                UnitModel.user = item;
+                // получаем заказы текущего рабочего
+                var Orders = db.Orders.Where(order => order.Worker.Id == item.Id);
+                if (Orders != null)
+                {
+                    UnitModel.CountOrders = Orders.Count();
+                }
+                models.Add(UnitModel);
+            }
+            return View(models);
         }
         [Authorize(Roles = "admin")]
 

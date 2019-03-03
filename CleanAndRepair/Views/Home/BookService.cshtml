@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Подтверждение заказа";
 }
+<title>Подтверждение заказа</title>
+
 @using (Html.BeginForm("BookService", "Home", FormMethod.Post))
 {
     <h2 class="col-md-offset-2">Заказ услуги</h2>
@@ -35,7 +37,7 @@
                 @Html.ValidationMessageFor(m => m.DateComplete, "", new { @class = "text-danger" })
             </dd>
             <dd><br /></dd>
-            
+
         </dl>
     </div>
     <div class="col-md-offset-2 col-md-10">

@@ -175,25 +175,37 @@ namespace CleanAndRepair.Controllers
             ApplicationUser WorkerMin = new ApplicationUser();
 
             var Workers = db.Users.Where(role => role.RoleName == "worker");
-            List<int> WorkerOrders = new List<int>();
+            var Orders = db.Orders;
+            string WorkerMinOrdersId = null;
+            int MinCountOrders =100000000; // понимаю, магическое число, условный максимум количества заказов, потом сделаю как-нибудь красиво
             foreach (var item in Workers)
             {
-                WorkerOrders.Add(item.Orders.Count());
+                var WorkerOrders = Orders.Where(o => o.Worker.Id == item.Id);
+                if (WorkerOrders.Count() < MinCountOrders)
+                {
+                    WorkerMinOrdersId = item.Id;
+                    MinCountOrders = WorkerOrders.Count();
+                }
             }
-            int min = WorkerOrders.Min();
-            foreach (var item in Workers)
-            {
-                if (item.Orders.Count() == min)
-                    WorkerMin = item;
-            }
+            WorkerMin = db.Users.FirstOrDefault(user => user.Id == WorkerMinOrdersId);
             // если рабочего с минимальным количеством заказов получить не получилось, то выбираем случайного
-            if(WorkerMin == null)
+            if (WorkerMin == null)
             {
                 var random = new Random();
                 int indexMin = random.Next(Workers.Count());
                 WorkerMin = Workers.ElementAt(indexMin);
             }
                 return WorkerMin;
+        }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+        public ActionResult Contacts()
+        {
+            return View();
         }
     }
 }

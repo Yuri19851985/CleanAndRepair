@@ -4,13 +4,14 @@
     ViewBag.Title = "EditGroup";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<title>Редактирование группы</title>
 
 <h2>Редактирование группы</h2>
 
 @using (Html.BeginForm("EditGroup", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
