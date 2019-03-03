@@ -58,24 +58,27 @@ else
             </td>
             @if (item.Complete == true)
             {
-                <td>
-                    <p>выполнен</p>
-                </td>
-                <td>
-                    @Html.ActionLink("Подробности", "OrderDetails", new { id = item.Id })
-                </td>
+            <td>
+                <p>выполнен</p>
+            </td>
+            <td>
+                @Html.ActionLink("Подробности", "OrderDetails", new { id = item.Id })
+            </td>
             }
             else
             {
-                    <td>
-                        <p>ожидается</p>
-                    </td>
-                    <td>
-                        @Html.ActionLink("Выполнен", "OrderComplete", new { id = item.Id })
-                    </td>
-            }           
-        </tr>
-            <tr id="DetailsOrderInf"></tr>
-        }
+                <td>
+                    <p>ожидается</p>
+                </td>
+                <td>
+                    @Html.ActionLink("Выезжаю", "OrderEmailNotification", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Выполнен", "OrderComplete", new { id = item.Id })
+                </td>
+            }
+                </tr>
+                <tr id="DetailsOrderInf"></tr>
+            }
     </table>
 }

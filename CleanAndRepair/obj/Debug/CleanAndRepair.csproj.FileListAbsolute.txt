@@ -68,3 +68,10 @@ D:\Diplom\CleanAndRepair\CleanAndRepair\bin\Microsoft.AI.Web.xml
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.csproj.CoreCompileInputs.cache
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.dll
 D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.pdb
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\ActionMailer.Net.dll
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\ActionMailer.Net.Mvc.dll
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\ActionMailer.Net.pdb
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\ActionMailer.Net.xml
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\ActionMailer.Net.Mvc.pdb
+D:\Diplom\CleanAndRepair\CleanAndRepair\bin\ActionMailer.Net.Mvc.xml
+D:\Diplom\CleanAndRepair\CleanAndRepair\obj\Debug\CleanAndRepair.csprojResolveAssemblyReference.cache

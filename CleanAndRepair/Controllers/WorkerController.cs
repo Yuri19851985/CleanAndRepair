@@ -105,5 +105,37 @@ namespace CleanAndRepair.Controllers
             }
             return View();
         }
+
+        // отправка уведомления на email о выезде специалиста
+        public ActionResult OrderEmailNotification(int id)
+        {
+            var Order = db.Orders.FirstOrDefault(o => o.Id == id);
+            var User = db.Users.FirstOrDefault(u => u.Id == Order.User.Id);
+            var Worker = db.Users.FirstOrDefault(w => w.Id == Order.Worker.Id);
+
+            EmailMessage message = new EmailMessage();
+            message.From = "cleanandrepairtest@yandex.ru";
+            message.To = User.Email;
+            message.Subject = "Выезд специалиста";
+            message.Body = "Здравствуйте! К Вам выехал специалист для оказания услуги. Пожалуйста оставайтесь дома до его приезда!";
+            try
+            {
+                new EmailController().SendEmail(message).Deliver();
+                return RedirectToAction("Success");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
+        public ActionResult Success()
+        {
+            return View();
+        }
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }
