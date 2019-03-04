@@ -15,22 +15,22 @@
                 </a>
                 <ul class="dropdown-menu">
                     @if (User.IsInRole("worker"))
-    {
-                <li><a href="/Worker/OrderListIdentityWorker">Список заказов</a></li>
-                <li><a href="/Worker/GetRaiting">Рейтинг</a></li>
-}
-else if (User.IsInRole("admin"))
-{
-                <li>@Html.ActionLink("Список пользователей", "UserList", "Admin")</li>
-                <li>@Html.ActionLink("Список работников", "WorkerList", "Admin")</li>
-                <li><a href="/Admin/ServiceList">Справочник услуг</a></li>
-                <li><a href="/Admin/GroupList">Справочник групп</a></li>
-}
-else if (User.IsInRole("user"))
-{
-                <li><a href="/User/UserProfile">Профиль</a></li>
-                <li><a href="/User/OrderListIdentityUser">Мои заказы</a></li>
-}
+                        {
+                            <li><a href="/Worker/OrderListIdentityWorker">Список заказов</a></li>
+                            <li><a href="/Worker/GetRaiting">Рейтинг</a></li>
+                        }
+                        else if (User.IsInRole("admin"))
+                        {
+                            <li>@Html.ActionLink("Список пользователей", "UserList", "Admin")</li>
+                            <li>@Html.ActionLink("Список работников", "WorkerList", "Admin")</li>
+                            <li><a href="/Admin/ServiceList">Справочник услуг</a></li>
+                            <li><a href="/Admin/GroupList">Справочник групп</a></li>
+                        }
+                        else if (User.IsInRole("user"))
+                        {
+                            <li><a href="/User/UserProfile">Профиль</a></li>
+                            <li><a href="/User/OrderListIdentityUser">Мои заказы</a></li>
+                        }
                 </ul>
             </li>
         </ul>

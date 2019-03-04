@@ -12,43 +12,49 @@
     <div>
         @Html.DisplayName("Место для фото")
     </div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayName("Логин")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-        <dt>
-            @Html.DisplayName("Имя")
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-        <dt>
-            @Html.DisplayName("Email")
-        </dt>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>
+                @Html.DisplayName("Логин")
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.UserName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayName("Имя")
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.FullName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayName("Email")
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayName("Телефон")
+            </td>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Телефон")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayName("Адрес")
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-    </dl>
+            <td>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayName("Адрес")
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Address)
+            </td>
+        </tr>
+    </table>
 </div>
 <p>
     @Html.ActionLink("Изменить профиль", "EditProfile") |

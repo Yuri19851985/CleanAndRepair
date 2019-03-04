@@ -11,7 +11,7 @@
 <h2>Подтверждение заказа</h2>
 @using (Html.BeginForm("BookServiceComplete", "Home", FormMethod.Post))
 {
-    <div class="col-md-offset-2">
+    <div>
         @Html.DisplayFor(m => m.User.UserName), Вы заказали
         @Html.DisplayFor(m => m.ServiceOrder.Name) на сумму:
         @Html.DisplayFor(m => m.TotalPrice) рублей
@@ -25,8 +25,8 @@
     @Html.HiddenFor(m => m.User)
     @Html.HiddenFor(m => m.Id)
 
-
-    <div class="col-md-offset-2 col-md-10">
+    <hr />
+    <div>
         <input type="submit" value="Подтвердить заказ" class="btn btn-default" />
     </div>
 }

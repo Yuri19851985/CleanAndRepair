@@ -7,43 +7,40 @@
 
 @using (Html.BeginForm("BookService", "Home", FormMethod.Post))
 {
-    <h2 class="col-md-offset-2">Заказ услуги</h2>
+    <h2>Заказ услуги</h2>
     <div>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayFor(m => m.Service.Name)
-            </dt>
-            <dd>
-                Описание услуги с фотографиями
-            </dd>
-            <dd><hr /></dd>
-        </dl>
+        <table class="table table-striped table-hover">
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => m.Service.Name)
+                </td>
+                <td>
+                    Описание услуги с фотографиями
+                </td>
+            </tr>
+        </table>
     </div>
-
     @Html.HiddenFor(m => m.Service.Id)
     @Html.HiddenFor(m => m.Service.Price)
     @Html.HiddenFor(m => m.Service.Name)
     @Html.HiddenFor(m => m.Service.Group)
-
-
-    <h4 class="col-md-offset-1">Параметры заказа</h4>
-    <hr />
+    <h4>Параметры заказа</h4>
     <div>
-        <dl class="dl-horizontal">
-            <dt> Выберите удобную для Вас дату</dt>
-            <dd>
-                @Html.EditorFor(m => m.DateComplete, new { htmlAttributes = new { @type = "date", @name = "date", @id = "dateCompleteField" } })
-                @Html.ValidationMessageFor(m => m.DateComplete, "", new { @class = "text-danger" })
-            </dd>
-            <dd><br /></dd>
+        <table class="table table-striped table-hover">
 
-        </dl>
+            <tr>
+                <td> Выберите удобную для Вас дату</td>
+                <td>
+                    @Html.EditorFor(m => m.DateComplete, new { htmlAttributes = new { @type = "date", @name = "date", @id = "dateCompleteField" } })
+                    @Html.ValidationMessageFor(m => m.DateComplete, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
     </div>
-    <div class="col-md-offset-2 col-md-10">
+    <div>
         <input type="submit" value="Заказать услугу" class="btn btn-default" />
     </div>
 }
-<div class="col-md-offset-1">
+<div>
     @Html.ActionLink("Вернуться на главную", "Index")
 </div>
