@@ -26,6 +26,8 @@ namespace CleanAndRepair.Context
         public DbSet<Order> Orders { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<GroupService> Groups { get; set; }
+        public DbSet<EmailMessage> Messages { get; set; }
+
 
     }
 }

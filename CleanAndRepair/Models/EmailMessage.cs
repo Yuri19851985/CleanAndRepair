@@ -7,6 +7,7 @@ namespace CleanAndRepair.Models
 {
     public class EmailMessage
     {
+        public int Id { get; set; }
         public string Subject { get; set; }
 
         public string From { get; set; }
